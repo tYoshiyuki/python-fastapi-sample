@@ -10,19 +10,19 @@ steps:
     versionSpec: 3.12
     architecture: 'x64'
     addToPath: true
-  displayName: ‘Change python version’
+  displayName: Change python version
 
 - script: |
     pip install -r requirements.txt -r requirements.dev.txt
-  displayName: ‘Execute pip install’
+  displayName: Execute pip install
 
 - script: |
     pytest tests -v --cov --cov-report=xml --cov-report=html
-  displayName: “Execute pytest with coverage”
+  displayName: Execute pytest with coverage
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: ‘$(System.DefaultWorkingDirectory)/**/coverage.xml’
-    reportDirectory: ‘$(System.DefaultWorkingDirectory)/**/htmlcov’
-  displayName: ‘Publish Cobertura Coverage Report’
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+  displayName: Publish coverage report
