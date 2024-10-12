@@ -1,10 +1,27 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, delete
+from sqlmodel import SQLModel, Session
 
-SQLALCHEMY_DATABASE_URI = "sqlite:///./fastapi-sample.db"
+from app import models
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args={"check_same_thread": False}, echo=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+sqlite_file_name = "fastapi-sample.db"
+sqlite_url = f"sqlite:///{sqlite_file_name}"
 
-Base = declarative_base()
+connect_args = {"check_same_thread": False}
+engine = create_engine(sqlite_url, connect_args=connect_args)
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+def seed():
+    with Session(engine) as session:
+        session.exec(delete(models.Hero))
+        session.commit()
+
+        session.add(models.Hero(id=101, name="One", age=11, secret_name="one"))
+        session.add(models.Hero(id=102, name="Two", age=22, secret_name="two"))
+        session.add(models.Hero(id=103, name="Three", age=33, secret_name="three"))
+        session.commit()

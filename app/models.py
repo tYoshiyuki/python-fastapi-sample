@@ -1,8 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from app.db import Base
+from sqlmodel import Field, SQLModel
 
-class Todo(Base):
-    __tablename__ = 'todos'
-    id = Column('id', Integer, primary_key = True)
-    title = Column('title', String(200))
-    done = Column('done', Boolean, default=False)
+class Hero(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    age: int | None = Field(default=None, index=True)
+    secret_name: str

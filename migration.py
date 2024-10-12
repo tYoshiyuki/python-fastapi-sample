@@ -1,5 +1,7 @@
-from app.models import Base
-from app.db import engine
+from app.db import create_db_and_tables, seed
 
 # テーブル作成
-Base.metadata.create_all(bind=engine)
+create_db_and_tables()
+
+# 初期データ投入
+seed()
