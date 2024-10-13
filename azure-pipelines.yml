@@ -21,6 +21,7 @@ steps:
   displayName: Execute pytest with coverage
 
 - task: PublishTestResults@2
+  condition: succeededOrFailed()
   inputs:
     testResultsFiles: "**/test-result.xml"
     testRunTitle: $(Build.DefinitionName)_$(Build.BuildNumber)_$(Build.BuildId)
