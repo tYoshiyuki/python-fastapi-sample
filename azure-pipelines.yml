@@ -10,11 +10,14 @@ steps:
     versionSpec: 3.12
   displayName: Change python version
 
-- script: |
-    pip install -r requirements.txt -r requirements.dev.txt
-  displayName: Execute pip install
+# - script: |
+#     pip install -r requirements.txt -r requirements.dev.txt
+#   displayName: Execute pip install
 
 - script: |
+    py -3.12 -m venv .venv
+    . .venv/Scripts/activate
+    pip install -r requirements.txt -r requirements.dev.txt
     pytest tests -v --cov --cov-branch --cov-report=xml --cov-report=html --junitxml=test_result/test-result.xml
     ls -l ./test_result
     cat test_result/coverage.xml 
