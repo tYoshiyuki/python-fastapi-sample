@@ -29,5 +29,4 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
   displayName: Publish coverage report
