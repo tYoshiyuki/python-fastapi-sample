@@ -1,4 +1,4 @@
-def test_health_check_ok(client):
+def test_hello_ok(client):
     """hello 正常系
     hello が 正常に動作することを確認します。
     """
