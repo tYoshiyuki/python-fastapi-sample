@@ -1,1 +1,1 @@
-pytest tests -v --cov --cov-report=xml --cov-report=html --junitxml=test_result/test-result.xml
+pytest tests -v --cov --cov-branch --cov-report=xml --cov-report=html --junitxml=test_result/test-result.xml
