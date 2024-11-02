@@ -29,7 +29,7 @@ jobs:
 
     - name: Publish Test Results
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: test-result
         path: test_result/test-result.xml
