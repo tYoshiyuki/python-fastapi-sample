@@ -6,3 +6,6 @@ echo "----------- activate venv -----------"
 
 echo "----------- pip install -----------"
 pip install -r requirements.txt -r requirements.dev.txt
+
+echo "----------- DB migration (SQLite - fastapi-sample.db) -----------"
+py ./migration.py
