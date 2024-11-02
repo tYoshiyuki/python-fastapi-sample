@@ -1,0 +1,41 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements.dev.txt
+
+    - name: Run tests
+      run: |
+        pytest tests -v --cov --cov-branch --cov-report=xml --cov-report=html --junitxml=test_result/test-result.xml
+
+    - name: Publish Test Results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-result
+        path: test_result/test-result.xml
+
+    - name: Publish coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: test_result/coverage.xml
