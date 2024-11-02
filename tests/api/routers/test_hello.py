@@ -1,3 +1,6 @@
+""" Helloエンドポイントのテスト """
+
+
 def test_hello_ok(client):
     """hello 正常系
     hello が 正常に動作することを確認します。
