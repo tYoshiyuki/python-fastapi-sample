@@ -14,5 +14,5 @@ def test_hero_ok(client):
     assert response.json() == [
         {"id": 101, "age": 11, "name": "One", "secret_name": "one"},
         {"id": 102, "age": 22, "name": "Two", "secret_name": "two"},
-        {"id": 103, "age": 33, "name": "Three", "secret_name": "three"}
+        {"id": 103, "age": 33, "name": "Three", "secret_name": "three"},
     ]
